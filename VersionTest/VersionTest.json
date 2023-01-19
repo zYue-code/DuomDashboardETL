@@ -1,0 +1,39 @@
+{
+  "name" : "VersionTest",
+  "description" : "",
+  "role" : "arn:aws:iam::884370575482:role/DuomBigdataAnalysis",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-884370575482-us-east-1/scripts/VersionTest.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-884370575482-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-884370575482-us-east-1/temporary/"
+  },
+  "maxRetries" : 3,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "3.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1\":{\"S3CatalogSource\":{\"AdditionalOptions\":{},\"Database\":\"duomdev\",\"Name\":\"S3 bucket\",\"PartitionPredicate\":\"\",\"Table\":\"adm_social_kol_analysis\"}},\"node-2\":{\"ApplyMapping\":{\"Inputs\":[\"node-1\"],\"Mapping\":[{\"Dropped\":false,\"FromPath\":[\"sta_date\"],\"FromType\":\"string\",\"ToKey\":\"sta_date\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"artist_id\"],\"FromType\":\"string\",\"ToKey\":\"artist_id\",\"ToType\":\"string\"},{\"Dropped\":false,\"FromPath\":[\"follow_count\"],\"FromType\":\"long\",\"ToKey\":\"follow_count\",\"ToType\":\"long\"},{\"Dropped\":false,\"FromPath\":[\"like_count\"],\"FromType\":\"long\",\"ToKey\":\"like_count\",\"ToType\":\"long\"},{\"Dropped\":false,\"FromPath\":[\"subscribe_count\"],\"FromType\":\"long\",\"ToKey\":\"subscribe_count\",\"ToType\":\"long\"},{\"Dropped\":false,\"FromPath\":[\"comment_count\"],\"FromType\":\"long\",\"ToKey\":\"comment_count\",\"ToType\":\"long\"}],\"Name\":\"ApplyMapping\"}},\"node-3\":{\"S3GlueParquetTarget\":{\"Compression\":\"snappy\",\"Inputs\":[\"node-2\"],\"Name\":\"S3 bucket\",\"PartitionKeys\":[],\"Path\":\"s3://duom-bigdata-analysis/dum-dev/adm/adm_social_kol_analysis/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "DuomDashboardETL",
+    "branch" : "master",
+    "folder" : "VersionTest"
+  }
+}
